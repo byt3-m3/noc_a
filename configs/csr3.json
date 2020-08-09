@@ -21,7 +21,7 @@
       },
       "ospf": {
         "p_id": "1",
-        "area_id": "100",
+        "area_id": "0",
         "network_type": "point-to-point",
         "auth": {
           "is_null": true
@@ -48,7 +48,7 @@
       },
       "ospf": {
         "p_id": "1",
-        "area_id": "100",
+        "area_id": "0",
         "network_type": "point-to-point",
         "auth": {
           "is_null": true
@@ -75,7 +75,7 @@
       },
       "ospf": {
         "p_id": "1",
-        "area_id": "100",
+        "area_id": "0",
         "auth": {
           "is_null": true
         }

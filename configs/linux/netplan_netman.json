@@ -1,0 +1,17 @@
+{
+  "interfaces": [
+    {
+      "link_id": "ens3",
+      "ipv4_gateway": "10.99.0.254",
+      "nameservers": [
+        "8.8.8.8"
+      ],
+      "ipv4_addrs": [
+        {
+          "address": "10.99.0.50",
+          "cidr": "/24"
+        }
+      ]
+    }
+  ]
+}

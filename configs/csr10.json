@@ -1,5 +1,5 @@
 {
-  "hostname": "R2-NOC-CORE",
+  "hostname": "CSR10-PE",
   "domain": "bits.local",
   "interfaces": [
     {
@@ -7,7 +7,7 @@
       "description": "MGMT Interface",
       "ipv4_addrs": [
         {
-          "address": "10.0.0.2",
+          "address": "10.0.0.10",
           "netmask": "255.255.255.255"
         }
       ]
@@ -15,33 +15,6 @@
     {
       "link_id": "Gi1",
       "bandwidth": "100",
-      "description": "CSR4",
-      "mpls": {
-        "ldp": true
-      },
-      "ospf": {
-        "p_id": "1",
-        "area_id": "0",
-        "network_type": "point-to-point",
-        "auth": {
-          "is_null": true
-        }
-      },
-      "ipv4_addrs": [
-        {
-          "address": "10.2.4.1",
-          "netmask": "255.255.255.252"
-        }
-      ],
-      "ipv6_addrs": [
-        {
-          "ipv6_address": "2001:2:4::1/64"
-        }
-      ]
-    },
-    {
-      "link_id": "Gi2",
-      "bandwidth": "50",
       "description": "CSR5",
       "mpls": {
         "ldp": true
@@ -56,39 +29,40 @@
       },
       "ipv4_addrs": [
         {
-          "address": "10.2.5.1",
+          "address": "10.5.10.2",
           "netmask": "255.255.255.252"
         }
       ],
       "ipv6_addrs": [
         {
-          "ipv6_address": "2001:2:5::1/64"
+          "ipv6_address": "2001:5:10::2/64"
         }
       ]
     },
     {
-      "link_id": "Gi3",
-      "bandwidth": "100",
-      "description": "CORE-SW",
+      "link_id": "Gi2",
+      "bandwidth": "50",
+      "description": "CSR12",
       "mpls": {
         "ldp": true
       },
       "ospf": {
         "p_id": "1",
         "area_id": "0",
+        "network_type": "point-to-point",
         "auth": {
           "is_null": true
         }
       },
       "ipv4_addrs": [
         {
-          "address": "10.99.0.2",
-          "netmask": "255.255.255.0"
+          "address": "10.10.12.1",
+          "netmask": "255.255.255.252"
         }
       ],
       "ipv6_addrs": [
         {
-          "ipv6_address": "2001:99::2/64"
+          "ipv6_address": "2001:10:12::1/64"
         }
       ]
     }

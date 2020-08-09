@@ -1,5 +1,5 @@
 {
-  "hostname": "R4-CORE",
+  "hostname": "CSR5-CORE",
   "domain": "bits.local",
   "interfaces": [
     {
@@ -7,7 +7,7 @@
       "description": "MGMT Interface",
       "ipv4_addrs": [
         {
-          "address": "10.0.0.4",
+          "address": "10.0.0.5",
           "netmask": "255.255.255.255"
         }
       ]
@@ -29,13 +29,13 @@
       },
       "ipv4_addrs": [
         {
-          "address": "10.2.4.2",
+          "address": "10.2.5.2",
           "netmask": "255.255.255.252"
         }
       ],
       "ipv6_addrs": [
         {
-          "ipv6_address": "2001:2:4::2/64"
+          "ipv6_address": "2001:2:5::2/64"
         }
       ]
     },
@@ -56,20 +56,20 @@
       },
       "ipv4_addrs": [
         {
-          "address": "10.3.4.2",
+          "address": "10.3.5.2",
           "netmask": "255.255.255.252"
         }
       ],
       "ipv6_addrs": [
         {
-          "ipv6_address": "2001:3:4::2/64"
+          "ipv6_address": "2001:3:5::2/64"
         }
       ]
     },
     {
       "link_id": "Gi3",
       "bandwidth": "100",
-      "description": "CSR7",
+      "description": "CSR9",
       "mpls": {
         "ldp": true
       },
@@ -82,20 +82,20 @@
       },
       "ipv4_addrs": [
         {
-          "address": "10.4.7.1",
+          "address": "10.5.9.1",
           "netmask": "255.255.255.252"
         }
       ],
       "ipv6_addrs": [
         {
-          "ipv6_address": "2001:4:7::1/64"
+          "ipv6_address": "2001:5:9::1/64"
         }
       ]
     },
     {
       "link_id": "Gi4",
       "bandwidth": "100",
-      "description": "CSR8",
+      "description": "CSR10",
       "mpls": {
         "ldp": true
       },
@@ -108,13 +108,13 @@
       },
       "ipv4_addrs": [
         {
-          "address": "10.4.8.1",
+          "address": "10.5.10.1",
           "netmask": "255.255.255.252"
         }
       ],
       "ipv6_addrs": [
         {
-          "ipv6_address": "2001:4:8::1/64"
+          "ipv6_address": "2001:5:10::1/64"
         }
       ]
     },
@@ -134,18 +134,44 @@
       },
       "ipv4_addrs": [
         {
-          "address": "10.4.11.1",
+          "address": "10.5.11.1",
           "netmask": "255.255.255.252"
         }
       ],
       "ipv6_addrs": [
         {
-          "ipv6_address": "2001:4:11::1/64"
+          "ipv6_address": "2001:5:11::1/64"
         }
       ]
     },
     {
       "link_id": "Gi6",
+      "bandwidth": "100",
+      "description": "CSR4",
+      "mpls": {
+        "ldp": true
+      },
+      "ospf": {
+        "p_id": "1",
+        "area_id": "0",
+        "auth": {
+          "is_null": true
+        }
+      },
+      "ipv4_addrs": [
+        {
+          "address": "10.4.5.2",
+          "netmask": "255.255.255.252"
+        }
+      ],
+      "ipv6_addrs": [
+        {
+          "ipv6_address": "2001:4:5::2/64"
+        }
+      ]
+    },
+    {
+      "link_id": "Gi7",
       "bandwidth": "100",
       "description": "CSR12",
       "mpls": {
@@ -160,39 +186,13 @@
       },
       "ipv4_addrs": [
         {
-          "address": "10.4.12.1",
+          "address": "10.5.12.1",
           "netmask": "255.255.255.252"
         }
       ],
       "ipv6_addrs": [
         {
-          "ipv6_address": "2001:4:12::1/64"
-        }
-      ]
-    },
-    {
-      "link_id": "Gi7",
-      "bandwidth": "100",
-      "description": "CSR5",
-      "mpls": {
-        "ldp": true
-      },
-      "ospf": {
-        "p_id": "1",
-        "area_id": "0",
-        "auth": {
-          "is_null": true
-        }
-      },
-      "ipv4_addrs": [
-        {
-          "address": "10.4.5.1",
-          "netmask": "255.255.255.252"
-        }
-      ],
-      "ipv6_addrs": [
-        {
-          "ipv6_address": "2001:4:5::1/64"
+          "ipv6_address": "2001:5:12::1/64"
         }
       ]
     }
