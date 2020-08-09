@@ -2,9 +2,9 @@ from netmiko import ConnectHandler
 import json
 
 with open('hosts.json', 'r') as hosts_file:
-    print("Opened hosts.json")
+    print("Opening hosts.json")
     data = json.load(hosts_file)
-    hosts = data.get('lab_hosts')
+    hosts = data.get('dev_hosts')
 
     for host in hosts:
 
@@ -18,6 +18,6 @@ with open('hosts.json', 'r') as hosts_file:
         handler = ConnectHandler(**connect_data)
         print(f"Getting {host} Config")
         config = handler.send_command("show run")
-        with open(f'../backups/{host}_cfg.txt', 'w') as config_file:
-            print(f"Storing Config to: bkup_configs/{host}_cfg.txt")
+        with open(f'../backups/{host}_bkup.txt', 'w') as config_file:
+            print(f"Saving Config to: ../backups/{host}_bkup.txt")
             config_file.write(config)
