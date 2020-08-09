@@ -2,6 +2,7 @@ from netmiko import ConnectHandler
 import json
 
 with open('hosts.json', 'r') as hosts_file:
+    print("Opened hosts.json")
     data = json.load(hosts_file)
     hosts = data.get('lab_hosts')
 
