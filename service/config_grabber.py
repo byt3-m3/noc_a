@@ -4,7 +4,7 @@ import json
 with open('hosts.json', 'r') as hosts_file:
     print("Opening hosts.json")
     data = json.load(hosts_file)
-    hosts = data.get('dev_hosts')
+    hosts = data.get('lab_hosts')
 
     for host in hosts:
 
