@@ -86,9 +86,19 @@ def get_ip_sla_stats(mgmt_ip):
 
     handler = ConnectHandler(**connect_data)
     try:
-        output = handler.send_command("show ip sla statistics")
+        sla_stats = handler.send_command("show ip sla statistics")
+        jitter_data = parse_jitter_threshold(sla_stats)
+
+        cef_output = handler.send_command(f"show ip cef vrf MGMT 10.99.0.254")
+        cef_data = parse_cef_next_hop(cef_output)
+
+        if jitter_data.get('rtt') > 20:
+            logger.error(
+                f'Host: {mgmt_ip} having issues on uplink: "{cef_data.get("link")}" Over threshold: {jitter_data.get("over_threshold")}%')
+
         handler.disconnect()
-        return output
+        return sla_stats, cef_data
+
     except NetmikoTimeoutException:
         pass
 
@@ -116,18 +126,10 @@ def main():
 
         for host in hosts:
             time.sleep(.5)
-            print(f"Connecting to Host: {host}")
             logger.info(f"Connecting to Host: {host}")
-            output = get_ip_cef_nexthop(host, "10.99.0.254")
-            cef_data = parse_cef_next_hop(output)
 
             output = get_ip_sla_stats(host)
-            jitter_data = parse_jitter_threshold(output)
-            if jitter_data.get('rtt') > 20:
-                logger.error(
-                    f'Host: {host} having issues on uplink: "{cef_data.get("link")}" Over threshold: {jitter_data.get("over_threshold")}%')
-                print(
-                    f'Host: {host} having issues on uplink: "{cef_data.get("link")}" Over threshold: {jitter_data.get("over_threshold")}%')
+            logger.info(output)
 
 
 if __name__ == "__main__":
