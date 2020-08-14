@@ -25,7 +25,7 @@ def main():
         xml_doc = et.fromstring(results)
         root = xml_doc[0]
         for el in root:
-            print(el.text)
+            print(el.tag, el.text)
 
 if __name__ == "__main__":
     main()
