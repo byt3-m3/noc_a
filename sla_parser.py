@@ -87,9 +87,9 @@ def get_ip_sla_stats(mgmt_ip):
     handler = ConnectHandler(**connect_data)
     try:
         sla_stats = handler.send_command("show ip sla statistics")
-        jitter_data = parse_jitter_threshold(sla_stats)
-
         cef_output = handler.send_command(f"show ip cef vrf MGMT 10.99.0.254")
+
+        jitter_data = parse_jitter_threshold(sla_stats)
         cef_data = parse_cef_next_hop(cef_output)
 
         if jitter_data.get('rtt') > 20:
