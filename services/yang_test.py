@@ -24,7 +24,8 @@ def main():
         print(results)
         xml_doc = et.fromstring(results)
         for i in xml_doc:
-            print(i)
+            for s in i:
+                print(s)
 
 if __name__ == "__main__":
     main()
