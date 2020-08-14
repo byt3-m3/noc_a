@@ -5,6 +5,8 @@ import logging
 from netmiko import ConnectHandler
 from netmiko.ssh_exception import NetmikoTimeoutException
 
+logging.basicConfig(level=logging.DEBUG)
+
 
 def parse_src_to_dest_jitter(string):
     """
