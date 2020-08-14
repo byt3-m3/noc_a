@@ -21,11 +21,11 @@ def main():
         </filter>
         """
         results = m.get(hostname_filter).data_xml
-        print(results)
+        # print(results)
         xml_doc = et.fromstring(results)
-        for i in xml_doc:
-            for s in i:
-                print(s)
+        root = xml_doc[0]
+        for el in root:
+            print(el.text)
 
 if __name__ == "__main__":
     main()
