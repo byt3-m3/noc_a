@@ -20,7 +20,7 @@ def main():
           <ENTITY-MIB xmlns="urn:ietf:params:xml:ns:yang:smiv2:ENTITY-MIB"/>
         </filter>
         """
-        results = m.get(hostname_filter).data_xml
+        results = m.get(ENTITY_FILTER).data_xml
         # print(results)
         xml_doc = et.fromstring(results)
         root = xml_doc[0]
