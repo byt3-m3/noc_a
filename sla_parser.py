@@ -1,5 +1,6 @@
 import re
 import time
+import logging
 
 from netmiko import ConnectHandler
 from netmiko.ssh_exception import NetmikoTimeoutException
@@ -29,6 +30,7 @@ def parse_src_to_dest_jitter(string):
     }
     return data
 
+
 def parse_jitter_threshold(string):
     """
     Parses the output of the 'show ip sla statistics' command and returns a dict cointaiing the min, avg, max jitter
@@ -51,6 +53,7 @@ def parse_jitter_threshold(string):
 
     }
     return data
+
 
 def parse_cef_next_hop(string):
     """
@@ -117,6 +120,8 @@ def main():
             output = get_ip_sla_stats(host)
             jitter_data = parse_jitter_threshold(output)
             if jitter_data.get('rtt') > 20:
+                logging.error(
+                    f'Host: {host} having issues on uplink: "{cef_data.get("link")}" Over threshold: {jitter_data.get("over_threshold")}%')
                 print(
                     f'Host: {host} having issues on uplink: "{cef_data.get("link")}" Over threshold: {jitter_data.get("over_threshold")}%')
 
