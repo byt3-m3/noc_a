@@ -2,6 +2,7 @@ import re
 import time
 
 from netmiko import ConnectHandler
+from netmiko.ssh_exception import NetmikoTimeoutException
 
 
 def parse_src_to_dest_jitter(string):
@@ -78,10 +79,12 @@ def get_ip_sla_stats(mgmt_ip):
     }
 
     handler = ConnectHandler(**connect_data)
-
-    output = handler.send_command("show ip sla statistics")
-    handler.disconnect()
-    return output
+    try:
+        output = handler.send_command("show ip sla statistics")
+        handler.disconnect()
+        return output
+    except NetmikoTimeoutException:
+        pass
 
 
 def get_ip_cef_nexthop(mgmt_ip, next_hop):
@@ -93,10 +96,12 @@ def get_ip_cef_nexthop(mgmt_ip, next_hop):
     }
 
     handler = ConnectHandler(**connect_data)
-
-    output = handler.send_command(f"show ip cef vrf MGMT {next_hop}")
-    handler.disconnect()
-    return output
+    try:
+        output = handler.send_command(f"show ip cef vrf MGMT {next_hop}")
+        handler.disconnect()
+        return output
+    except NetmikoTimeoutException:
+        pass
 
 
 def main():
@@ -105,6 +110,7 @@ def main():
         time.sleep(5)
         for host in hosts:
             print(f"Connecting to Host: {host}")
+
             output = get_ip_cef_nexthop(host, "10.99.0.254")
             cef_data = parse_cef_next_hop(output)
 
