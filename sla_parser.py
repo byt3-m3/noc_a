@@ -5,7 +5,7 @@ import logging
 from netmiko import ConnectHandler
 from netmiko.ssh_exception import NetmikoTimeoutException
 
-logging.basicConfig(level=logging.ERROR)
+logging.basicConfig(level=logging.INFO)
 
 
 def parse_src_to_dest_jitter(string):
@@ -112,10 +112,11 @@ def get_ip_cef_nexthop(mgmt_ip, next_hop):
 def main():
     hosts = ['10.99.7.0', '10.99.8.0', '10.99.9.0', '10.99.10.0']
     while True:
-        time.sleep(.5)
-        for host in hosts:
-            print(f"Connecting to Host: {host}")
 
+        for host in hosts:
+            time.sleep(.5)
+            print(f"Connecting to Host: {host}")
+            logging.info(f"Connecting to Host: {host}")
             output = get_ip_cef_nexthop(host, "10.99.0.254")
             cef_data = parse_cef_next_hop(output)
 
