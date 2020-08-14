@@ -107,7 +107,7 @@ def get_ip_cef_nexthop(mgmt_ip, next_hop):
 def main():
     hosts = ['10.99.7.0', '10.99.8.0', '10.99.9.0', '10.99.10.0']
     while True:
-        time.sleep(5)
+        time.sleep(.5)
         for host in hosts:
             print(f"Connecting to Host: {host}")
 
