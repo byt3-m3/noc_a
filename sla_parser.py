@@ -5,7 +5,8 @@ import logging
 from netmiko import ConnectHandler
 from netmiko.ssh_exception import NetmikoTimeoutException
 
-logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.ERROR)
 
 
 def parse_src_to_dest_jitter(string):
@@ -116,14 +117,14 @@ def main():
         for host in hosts:
             time.sleep(.5)
             print(f"Connecting to Host: {host}")
-            logging.info(f"Connecting to Host: {host}")
+            logger.info(f"Connecting to Host: {host}")
             output = get_ip_cef_nexthop(host, "10.99.0.254")
             cef_data = parse_cef_next_hop(output)
 
             output = get_ip_sla_stats(host)
             jitter_data = parse_jitter_threshold(output)
             if jitter_data.get('rtt') > 20:
-                logging.error(
+                logger.error(
                     f'Host: {host} having issues on uplink: "{cef_data.get("link")}" Over threshold: {jitter_data.get("over_threshold")}%')
                 print(
                     f'Host: {host} having issues on uplink: "{cef_data.get("link")}" Over threshold: {jitter_data.get("over_threshold")}%')
