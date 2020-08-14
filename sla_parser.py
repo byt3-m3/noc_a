@@ -58,7 +58,7 @@ def get_ip_sla_jitter(mgmt_ip):
     handler = ConnectHandler(**connect_data)
 
     output = handler.send_command("show ip sla statistics")
-
+    handler.disconnect()
     return output
 
 
@@ -73,7 +73,7 @@ def get_ip_cef_nexthop(mgmt_ip, next_hop):
     handler = ConnectHandler(**connect_data)
 
     output = handler.send_command(f"show ip cef vrf MGMT {next_hop}")
-
+    handler.disconnect()
     return output
 
 
@@ -83,12 +83,12 @@ def main():
         time.sleep(5)
         for host in hosts:
             output = get_ip_cef_nexthop(host, "10.99.0.254")
-            data = parse_cef_next_hop(output)
-            print(data)
+            cef_data = parse_cef_next_hop(output)
 
             output = get_ip_sla_jitter(host)
-            data = parse_src_to_dest_jitter(output)
-            print(data)
+            jitter_data = parse_src_to_dest_jitter(output)
+            if jitter_data.get('jitter_avg') > 10:
+                print(f'Host: {host} having issues on uplink: "{cef_data.get("link")}"')
 
 
 if __name__ == "__main__":
