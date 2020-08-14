@@ -7,11 +7,12 @@ def main():
         #     print(i)
         # sla_schema = m.get_schema('ENTITY-MIB')
         # print(sla_schema)
-        print(m.get("""
+        ENTITY_FILTER = """
         <filter>
           <ENTITY-MIB xmlns="urn:ietf:params:xml:ns:yang:smiv2:ENTITY-MIB"/>
         </filter>
-        """).data_xml)
+        """
+        print(m.get(ENTITY_FILTER).data_xml)
 
 
 if __name__ == "__main__":
