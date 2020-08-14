@@ -8,7 +8,7 @@ def main():
         # sla_schema = m.get_schema('ietf-interfaces')
         # print(sla_schema)
         print(m.get("""
-        <filter>
+        <filter type="subtree">
             <top xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
                 <interfaces>
                 </interfaces>
