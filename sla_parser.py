@@ -60,12 +60,8 @@ def get_ip_sla_jitter(mgmt_ip):
 
 
 def main():
-    with open('dev_files/show_ip_cef_output.text', 'r') as file:
-        buffer = file.read()
-        result = parse_cef_next_hop(buffer)
-
-        print(result)
-
+    output = get_ip_sla_jitter('10.99.7.0')
+    print(output)
 
 if __name__ == "__main__":
     main()
