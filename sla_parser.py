@@ -88,7 +88,7 @@ def main():
 
             output = get_ip_sla_jitter(host)
             jitter_data = parse_src_to_dest_jitter(output)
-            if jitter_data.get('jitter_avg') > 10:
+            if jitter_data.get('jitter_avg') > 20:
                 print(
                     f'Host: {host} having issues on uplink: "{cef_data.get("link")}" Jitter Levels: {jitter_data.get("jitter_avg")}')
 
