@@ -5,7 +5,7 @@ def main():
     with manager.connect_ssh("10.99.7.0", username="cisco", password='cisco') as m:
         # for i in m.server_capabilities:
         #     print(i)
-        sla_schema = m.get_schema('cisco-xe-openconfig-if-ethernet-deviation')
+        sla_schema = m.get_schema('oc-if-eth-devs')
         print(sla_schema)
 
 
