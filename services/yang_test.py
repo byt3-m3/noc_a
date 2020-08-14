@@ -1,4 +1,5 @@
 from ncclient import manager
+from xml.etree import ElementTree as et
 
 
 def main():
@@ -19,8 +20,8 @@ def main():
           <ENTITY-MIB xmlns="urn:ietf:params:xml:ns:yang:smiv2:ENTITY-MIB"/>
         </filter>
         """
-        print(m.get(hostname_filter).data_xml)
-
+        results = m.get(hostname_filter).data_xml
+        print(et.fromstring(results))
 
 if __name__ == "__main__":
     main()
