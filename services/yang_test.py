@@ -22,8 +22,9 @@ def main():
         """
         results = m.get(hostname_filter).data_xml
         print(results)
-        print(et.fromstring(results).tag)
-        print(et.fromstring(results).text)
+        xml_doc = et.fromstring(results)
+        for i in xml_doc:
+            print(i)
 
 if __name__ == "__main__":
     main()
