@@ -8,13 +8,13 @@ def main():
         # sla_schema = m.get_schema('ietf-interfaces')
         # print(sla_schema)
         print(m.get("""
-        <filter>
+    
             <top xmlns="ietf-interfaces">
                 <interfaces>
        
                 </interfaces>
             </top>
-        </filter>
+    
         """))
 
 
