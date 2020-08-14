@@ -9,11 +9,9 @@ def main():
         # print(sla_schema)
         print(m.get("""
         <filter>
-            <top xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
+            <top xmlns="ietf-interfaces">
                 <interfaces>
-                    <interface>
-                        <name>GigabitEthernet1</name>
-                    </interface>
+       
                 </interfaces>
             </top>
         </filter>
