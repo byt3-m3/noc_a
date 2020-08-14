@@ -7,6 +7,12 @@ def main():
         #     print(i)
         sla_schema = m.get_schema('cisco-xe-openconfig-interfaces-ext')
         print(sla_schema)
+        print(m.get("""
+        <filter>
+            <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"/>
+        </filter>
+        
+        """))
 
 
 if __name__ == "__main__":
