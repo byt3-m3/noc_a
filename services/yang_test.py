@@ -10,7 +10,11 @@ def main():
         print(m.get("""
         <filter>
             <top xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
-          
+                <interfaces>
+                    <interface>
+                        <name>GigabitEthernet1</name>
+                    </interface>
+                </interfaces>
             </top>
         </filter>
         """))
