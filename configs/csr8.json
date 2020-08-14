@@ -14,7 +14,7 @@
     },
     {
       "link_id": "Gi1",
-      "bandwidth": "100",
+      "bandwidth": "50",
       "description": "CSR4",
       "mpls": {
         "ldp": true
@@ -41,7 +41,7 @@
     },
     {
       "link_id": "Gi2",
-      "bandwidth": "50",
+      "bandwidth": "75",
       "description": "CSR11",
       "mpls": {
         "ldp": true
