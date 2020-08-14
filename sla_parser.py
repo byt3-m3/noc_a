@@ -82,6 +82,7 @@ def main():
     while True:
         time.sleep(5)
         for host in hosts:
+            print(f"Connecting to Host: {host}")
             output = get_ip_cef_nexthop(host, "10.99.0.254")
             cef_data = parse_cef_next_hop(output)
 
