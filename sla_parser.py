@@ -39,7 +39,6 @@ def parse_jitter_threshold(string):
     PATTERN_SRC_TO_DEST_JITTER = re.compile('Over Threshold:\n.*: (\d*).*\((\d*)')
 
     match = PATTERN_SRC_TO_DEST_JITTER.findall(string)
-    print(match)
     data = match.pop()
 
     rtt = data[0]
