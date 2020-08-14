@@ -24,6 +24,7 @@ def parse_src_to_dest_jitter(string):
         'jitter_avg': int(jitter_avg),
         'jitter_max': int(jitter_max)
     }
+    return data
 
 
 def parse_cef_next_hop(string):
@@ -58,6 +59,7 @@ def get_ip_sla_jitter(mgmt_ip):
 
     return output
 
+
 def get_ip_cef_nexthop(mgmt_ip, next_hop):
     connect_data = {
         'device_type': 'cisco_ios',
@@ -72,10 +74,16 @@ def get_ip_cef_nexthop(mgmt_ip, next_hop):
 
     return output
 
+
 def main():
     output = get_ip_cef_nexthop('10.99.7.0', "10.99.0.254")
     data = parse_cef_next_hop(output)
     print(data)
+
+    output = get_ip_sla_jitter('10.99.7.0')
+    data = parse_src_to_dest_jitter(output)
+    print(data)
+
 
 if __name__ == "__main__":
     main()
