@@ -21,6 +21,8 @@ def main():
         </filter>
         """
         results = m.get(hostname_filter).data_xml
+        print(results)
+        print(et.fromstring(results).tag)
         print(et.fromstring(results).text)
 
 if __name__ == "__main__":
