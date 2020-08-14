@@ -7,12 +7,19 @@ def main():
         #     print(i)
         # sla_schema = m.get_schema('ENTITY-MIB')
         # print(sla_schema)
+        hostname_filter = '''
+                              <filter>
+                                  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+                                  </native>
+                              </filter>
+                              '''
+
         ENTITY_FILTER = """
         <filter>
           <ENTITY-MIB xmlns="urn:ietf:params:xml:ns:yang:smiv2:ENTITY-MIB"/>
         </filter>
         """
-        print(m.get(ENTITY_FILTER).data_xml)
+        print(m.get(hostname_filter).data_xml)
 
 
 if __name__ == "__main__":
