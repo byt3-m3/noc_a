@@ -9,9 +9,15 @@ def main():
         print(sla_schema)
         print(m.get("""
         <filter>
-            <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"/>
+            <interfaces xmlns="http://openconfig.net/yang/interfaces">
+    <interface>
+        <name>{{INTF_NAME}}</name>
+      <config>
+      </config>
+      <subinterfaces/>
+    </interface>
+</interfaces>
         </filter>
-        
         """))
 
 
