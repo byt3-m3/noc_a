@@ -28,6 +28,29 @@ def parse_src_to_dest_jitter(string):
     }
     return data
 
+def parse_jitter_threshold(string):
+    """
+    Parses the output of the 'show ip sla statistics' command and returns a dict cointaiing the min, avg, max jitter
+    values
+
+    :param string:
+    :return:
+    """
+    PATTERN_SRC_TO_DEST_JITTER = re.compile('Over Threshold:\n.*: (\d*).*\((\d*)')
+
+    match = PATTERN_SRC_TO_DEST_JITTER.findall(string)
+    print(match)
+    data = match.pop()
+
+    rtt = data[0]
+    over_threshold = data[1]
+
+    data = {
+        'over_threshold': int(over_threshold),
+        'rtt': int(rtt),
+
+    }
+    return data
 
 def parse_cef_next_hop(string):
     """
@@ -47,7 +70,7 @@ def parse_cef_next_hop(string):
     }
 
 
-def get_ip_sla_jitter(mgmt_ip):
+def get_ip_sla_stats(mgmt_ip):
     connect_data = {
         'device_type': 'cisco_ios',
         'host': f'{mgmt_ip}',
@@ -86,12 +109,16 @@ def main():
             output = get_ip_cef_nexthop(host, "10.99.0.254")
             cef_data = parse_cef_next_hop(output)
 
-            output = get_ip_sla_jitter(host)
-            jitter_data = parse_src_to_dest_jitter(output)
-            if jitter_data.get('jitter_avg') > 20:
+            output = get_ip_sla_stats(host)
+            jitter_data = parse_jitter_threshold(output)
+            if jitter_data.get('rtt') > 20:
                 print(
-                    f'Host: {host} having issues on uplink: "{cef_data.get("link")}" Jitter Levels: {jitter_data.get("jitter_avg")}')
+                    f'Host: {host} having issues on uplink: "{cef_data.get("link")}" Over threshold: {jitter_data.get("threshold")}%')
 
 
 if __name__ == "__main__":
     main()
+    # with open('dev_files/show_ip_sla_stat_output.txt', 'r') as f:
+    #     buffer = f.read()
+    #     res = parse_jitter_threshold(buffer)
+    #     print(res)
