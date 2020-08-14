@@ -113,7 +113,7 @@ def main():
             jitter_data = parse_jitter_threshold(output)
             if jitter_data.get('rtt') > 20:
                 print(
-                    f'Host: {host} having issues on uplink: "{cef_data.get("link")}" Over threshold: {jitter_data.get("threshold")}%')
+                    f'Host: {host} having issues on uplink: "{cef_data.get("link")}" Over threshold: {jitter_data.get("over_threshold")}%')
 
 
 if __name__ == "__main__":
