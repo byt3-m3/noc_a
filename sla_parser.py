@@ -96,24 +96,6 @@ def get_ip_sla_stats(mgmt_ip):
         'password': 'cisco',
     }
 
-    # handler = ConnectHandler(**connect_data)
-    # try:
-    #     sla_stats = handler.send_command(command_string="show ip sla statistics")
-    #     cef_output = handler.send_command(command_string=f"show ip cef vrf MGMT 10.99.0.254")
-    #
-    #     jitter_data = parse_jitter_threshold(string=sla_stats)
-    #     cef_data = parse_cef_next_hop(string=cef_output)
-    #
-    #     if jitter_data.get('rtt') > THRESHOLD:  # Test if rtt is over the configured threshold
-    #         logger.error(
-    #             f'Host: {mgmt_ip} having issues on uplink: "{cef_data.get("link")}" Over threshold: {jitter_data.get("over_threshold")}%')
-    #
-    #     handler.disconnect()
-    #     return sla_stats, cef_data
-    #
-    # except NetmikoTimeoutException:
-    #     pass
-
     with ConnectHandler(**connect_data) as ch:
         sla_stats = ch.send_command(command_string="show ip sla statistics")
         cef_output = ch.send_command(command_string=f"show ip cef vrf MGMT 10.99.0.254")
@@ -143,20 +125,27 @@ def get_ip_cef_nexthop(asset_ip, destination):
         'password': 'cisco',
     }
 
-    handler = ConnectHandler(**connect_data)
-    try:
-        output = handler.send_command(command_string=f"show ip cef vrf MGMT {destination}")
-        handler.disconnect()
+    with ConnectHandler(**connect_data) as ch:
+        output = ch.send_command(command_string=f"show ip cef vrf MGMT {destination}")
+
         return output
-    except NetmikoTimeoutException:
-        pass
+
+
+def get_hosts():
+    hosts = ['10.99.7.0', '10.99.8.0', '10.99.9.0', '10.99.10.0']
+    for host in hosts:
+        yield host
 
 
 def main():
-    hosts = ['10.99.7.0', '10.99.8.0', '10.99.9.0', '10.99.10.0']
+    '''
+    Runs the main loop, This iterate of the
+    :return:
+    '''
+
     while True:
 
-        for host in hosts:
+        for host in get_hosts():
             time.sleep(.5)
             logger.info(f"Connecting to Host: {host}")
 
@@ -164,9 +153,12 @@ def main():
             logger.info(output)
 
 
+def dev():
+    with open('dev_files/show_ip_sla_stat_output.txt', 'r') as f:
+        buffer = f.read()
+        res = parse_jitter_threshold(buffer)
+        print(res)
+
+
 if __name__ == "__main__":
     main()
-    # with open('dev_files/show_ip_sla_stat_output.txt', 'r') as f:
-    #     buffer = f.read()
-    #     res = parse_jitter_threshold(buffer)
-    #     print(res)
