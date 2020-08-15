@@ -2,6 +2,7 @@ import re
 import time
 import logging
 import os
+import json
 
 from netmiko import ConnectHandler
 from netmiko.ssh_exception import NetmikoTimeoutException
@@ -132,14 +133,21 @@ def get_ip_cef_nexthop(asset_ip, destination):
 
 
 def get_hosts():
-    hosts = ['10.99.7.0', '10.99.8.0', '10.99.9.0', '10.99.10.0']
+    logger.info('Loading DB')
+    with open('hosts.json', 'r') as file:
+        data = json.load(file)
+        hosts = data['lab_hosts']
+        logger.info('DB Updated!')
+
     for host in hosts:
+        logger.info(f'Providing Host {host}')
         yield host
 
 
 def main():
     '''
-    Runs the main loop, This iterate of the
+    Runs the main loop
+
     :return:
     '''
 
