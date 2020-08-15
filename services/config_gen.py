@@ -1,6 +1,18 @@
-import requests
 import json
 import os
+import logging
+from argparse import ArgumentParser
+
+import requests
+
+'''
+The purpose of this script is to Generate Configurations located in the ../configs folder. This services use the LCG
+service hosted on the cloud
+
+'''
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.WARNING)
 
 
 class LCGClient:
@@ -56,7 +68,7 @@ def gen_configs():
         with open(f'{JSON_CONFIGS}/{filename}', 'r') as f:
             data = json.loads(f.read())
             node_obj = type('Node', (object,), data)
-            print(f'Generated Config for {node_obj.hostname}')
+            logger.info(f'Generated Config for {node_obj.hostname}')
             config = lcg_client.gen_base_config(data)
             with open(f'../output/{filename.replace(".json", ".cfg")}', 'w') as fw:
                 fw.write(config.content.decode())
@@ -64,14 +76,22 @@ def gen_configs():
 
 
 def gen_netplan():
-    # lcg_client = LCGClient(host="127.0.0.1", port=5002, template_type='linux_netplan_base')
-
     with open('../configs/linux/netplan_netman.json', 'r') as file_h:
         data = json.load(file_h)
-        # print(data)
 
         resp = lcg_client.gen_netplan(data)
-        print(resp.content.decode())
+        logger.info(resp.content.decode())
 
 
-gen_configs()
+if __name__ == '__main__':
+    parser = ArgumentParser(description='Config Generation Util')
+    parser.add_argument('generate_configs', help='Generates Configurations located in the ../configs dir')
+    parser.add_argument('generate_netplan', help='Generates Configurations located in the ../configs dir')
+
+    args = parser.parse_args()
+
+    if args.generate_configs:
+        gen_configs()
+
+    if args.generate_netplan:
+        gen_netplan()
