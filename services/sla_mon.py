@@ -17,7 +17,7 @@ The purpose of this application is to is the following:
 '''
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.debug())
+logger.setLevel(logging.DEBUG)
 
 THRESHOLD = os.getenv('THRESHOLD', 20)
 HOST_FILE = os.getenv('HOST_FILE', '../hosts.json')
