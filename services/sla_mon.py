@@ -17,10 +17,10 @@ The purpose of this application is to is the following:
 '''
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.debug())
 
 THRESHOLD = os.getenv('THRESHOLD', 20)
-
+HOST_FILE = os.getenv('HOST_FILE', '../hosts.json')
 
 def parse_src_to_dest_jitter(string):
     """
@@ -134,7 +134,7 @@ def get_ip_cef_nexthop(asset_ip, destination):
 
 def get_hosts():
     logger.info('Loading DB')
-    with open('hosts.json', 'r') as file:
+    with open(HOST_FILE, 'r') as file:
         data = json.load(file)
         hosts = data['lab_hosts']
         logger.info('DB Updated!')
