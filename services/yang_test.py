@@ -17,7 +17,9 @@ def main():
 
         ENTITY_FILTER = """
         <filter>
-          <ENTITY-MIB xmlns="urn:ietf:params:xml:ns:yang:smiv2:ENTITY-MIB"/>
+          <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+                    <interface/>
+                    </native>
         </filter>
         """
         results = m.get(ENTITY_FILTER).data_xml
