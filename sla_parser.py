@@ -17,7 +17,7 @@ The purpose of this application is to is the following:
 '''
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.ERROR)
+logger.setLevel(logging.INFO)
 
 THRESHOLD = os.getenv('THRESHOLD', 20)
 
