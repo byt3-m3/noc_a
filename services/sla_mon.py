@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 THRESHOLD = os.getenv('THRESHOLD', 20)
-HOST_FILE = os.getenv('HOST_FILE', '../hosts.json')
+HOST_FILE = os.getenv('HOST_FILE', 'hosts.json')
 
 def parse_src_to_dest_jitter(string):
     """
